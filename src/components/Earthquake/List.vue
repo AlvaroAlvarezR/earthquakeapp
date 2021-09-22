@@ -37,8 +37,7 @@
             </b-form-group>
         </b-modal>
         <b-modal 
-            v-model="modalDeleteShow"
-           
+            v-model="modalDeleteShow" 
         >
             <h2>Está seguro?</h2>
             <template #modal-footer="{ cancel }">
@@ -47,6 +46,31 @@
                 </b-button>
                 <b-button size="sm" variant="danger" @click="cancel()">
                     No
+                </b-button>
+            </template>
+        </b-modal>
+        <b-modal 
+            v-model="modalCreateShow"
+            @ok="handleOk"
+        >
+            <b-form-group
+                label="Ingrese nuevo titulo"
+                label-for="create-title"
+            >
+                <b-form-input id="create-title" v-model="featureSelected.properties.title" trim></b-form-input>
+            </b-form-group>
+            <b-form-group
+                label="Ingrese nuevo estatus"
+                label-for="create-status"
+            >
+                <b-form-input id="create-status" v-model="featureSelected.properties.status" trim></b-form-input>
+            </b-form-group>
+            <template #modal-footer="{ cancel }">
+                <b-button size="sm" variant="success" @click="addFeature()">
+                    Crear
+                </b-button>
+                <b-button size="sm" variant="danger" @click="cancel()">
+                    Cancelar
                 </b-button>
             </template>
         </b-modal>
@@ -75,6 +99,7 @@ export default {
             },
             modalShow: false,
             modalDeleteShow: false,
+            modalCreateShow: false,
             loading: true,
 
         }
@@ -108,14 +133,20 @@ export default {
             this.featureSelected = {...feature};
             if (modal ==='edit') {
                 this.modalShow = true;
-            } else {
+            } else if(modal ==='delete') {
                 this.modalDeleteShow = true;
+            } else {
+                this.modalCreateShow = true;
             }
         },
         deleteFeature(){
             const objIndex = this.listFiltered.findIndex((feature => feature.id === this.featureSelected.id));
             this.listFiltered.splice(objIndex, 1);
             this.modalDeleteShow = false;
+        },
+        addFeature(){
+            this.listFiltered = [...this.listFiltered, this.featureSelected];
+            this.modalCreateShow = false;
         },
         cutCoordinate(coordinate){
             return coordinate.toFixed(2);
