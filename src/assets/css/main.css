@@ -1,0 +1,27 @@
+.features-card{
+    border: 1px solid #000;
+    height: 150px;
+    margin: 25px 0px;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    text-align: justify;
+}
+
+.features-card-data{
+    display: flex;
+    flex-direction: column;
+}
+
+.features-card-data>.coordinates{
+    font-size: 0.75rem;
+}
+
+.features-card-button{
+    width: 60px;
+}
+
+.searchInput{
+    width: 350px;
+    float: right;
+}
