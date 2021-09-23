@@ -1,5 +1,6 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
+    <h1>Alvaro Andrés Alvarez Rodríguez</h1>
+    <h2>Ingeniero Electrónico-Desarrollador Frontend</h2>
   </div>
 </template>
